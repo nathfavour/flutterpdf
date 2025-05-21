@@ -19,7 +19,7 @@ final _OpenPdfDart openPdf =
 // C: int get_page_count(void* handle);
 typedef _GetPageCountNative = Int32 Function(Pointer<Void>);
 typedef _GetPageCountDart = int Function(Pointer<Void>);
-final _GetPageCountDart getPageCount =
+final _GetPageCountDart nativeGetPageCount =
     _nativePdfLib
         .lookup<NativeFunction<_GetPageCountNative>>('get_page_count')
         .asFunction();
@@ -29,9 +29,17 @@ typedef _RenderPageNative =
     Int32 Function(Pointer<Void>, Int32, Pointer<Uint8>, Int32, Int32);
 typedef _RenderPageDart =
     int Function(Pointer<Void>, int, Pointer<Uint8>, int, int);
-final _RenderPageDart renderPage =
+final _RenderPageDart nativeRenderPage =
     _nativePdfLib
         .lookup<NativeFunction<_RenderPageNative>>('render_page')
+        .asFunction();
+
+// C: void close_pdf(void* handle);
+typedef _ClosePdfNative = Void Function(Pointer<Void>);
+typedef _ClosePdfDart = void Function(Pointer<Void>);
+final _ClosePdfDart closePdf =
+    _nativePdfLib
+        .lookup<NativeFunction<_ClosePdfNative>>('close_pdf')
         .asFunction();
 
 // Add more FFI bindings as needed for your native library.
